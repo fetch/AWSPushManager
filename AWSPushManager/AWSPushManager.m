@@ -49,8 +49,6 @@ static NSString* defaultPlatformARN;
         [self setEndpointARN:nil];
         [self setEnabled:NO];
         [self setPlatformARN:nil];
-        
-        [self registerForPushNotifications];
     }
     
     return self;

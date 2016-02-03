@@ -239,6 +239,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo;
 - (void)pushManager:(AWSPushManager *)pushManager
 didFailToRegisterWithError:(NSError *)error;
 
+@optional
+
 /**
  Indicates the device received a Push Notifiation.
  
@@ -270,7 +272,7 @@ didFailToDisableWithError:(NSError *)error;
  */
 @protocol AWSPushTopicDelegate <NSObject>
 
-@required
+@optional
 
 /**
  Indicates the subscribe succeeded.

@@ -163,8 +163,10 @@ static NSString* defaultPlatformARN;
         if (task.error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSError *error = task.error;
-                [weakSelf.delegate pushManager:weakSelf
-                     didFailToDisableWithError:error];
+                if ([weakSelf.delegate respondsToSelector:@selector(pushManager:didFailToDisableWithError:)]) {
+                    [weakSelf.delegate pushManager:weakSelf
+                         didFailToDisableWithError:error];
+                }
             });
         }
         if (task.exception) {
@@ -173,7 +175,9 @@ static NSString* defaultPlatformARN;
         if (task.result) {
             weakSelf.enabled = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.delegate pushManagerDidDisable:weakSelf];
+                if ([weakSelf.delegate respondsToSelector:@selector(pushManagerDidDisable:)]) {
+                    [weakSelf.delegate pushManagerDidDisable:weakSelf];
+                }
             });
         }
         return nil;
@@ -308,13 +312,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     self.enabled = NO;
     [self.delegate pushManager:self
-    didFailToRegisterWithError:error];
+        didFailToRegisterWithError:error];
 }
 
 - (void)interceptApplication:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [self.delegate pushManager:self
-    didReceivePushNotification:userInfo];
+    if ([self.delegate respondsToSelector:@selector(pushManager:didReceivePushNotification:)]) {
+        [self.delegate pushManager:self
+            didReceivePushNotification:userInfo];
+    }
 }
 
 @end
@@ -376,13 +382,17 @@ NSString *const AWSPushTopicDictionaryTopicARNKey = @"topicARN";
             AWSSNSSubscribeResponse *subscribeResponse = task.result;
             self.subscriptionARN = subscribeResponse.subscriptionArn;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[AWSPushManager defaultPushManager].delegate topicDidSubscribe:weakSelf];
+                if ([[AWSPushManager defaultPushManager].delegate respondsToSelector:@selector(topicDidSubscribe:)]) {
+                    [[AWSPushManager defaultPushManager].delegate topicDidSubscribe:weakSelf];
+                }
             });
         }
         if (task.error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[AWSPushManager defaultPushManager].delegate topic:weakSelf
-                                        didFailToSubscribeWithError:task.error];
+                if ([[AWSPushManager defaultPushManager].delegate respondsToSelector:@selector(topic:didFailToSubscribeWithError:)]) {
+                    [[AWSPushManager defaultPushManager].delegate topic:weakSelf
+                                            didFailToSubscribeWithError:task.error];
+                }
             });
         }
         return nil;
@@ -399,12 +409,16 @@ NSString *const AWSPushTopicDictionaryTopicARNKey = @"topicARN";
         if (!task.error) {
             self.subscriptionARN = nil;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[AWSPushManager defaultPushManager].delegate topicDidUnsubscribe:weakSelf];
+                if ([[AWSPushManager defaultPushManager].delegate respondsToSelector:@selector(topicDidUnsubscribe:)]) {
+                    [[AWSPushManager defaultPushManager].delegate topicDidUnsubscribe:weakSelf];
+                }
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[AWSPushManager defaultPushManager].delegate topic:weakSelf
-                                      didFailToUnsubscribeWithError:task.error];
+                if ([[AWSPushManager defaultPushManager].delegate respondsToSelector:@selector(topic:didFailToUnsubscribeWithError:)]) {
+                    [[AWSPushManager defaultPushManager].delegate topic:weakSelf
+                                          didFailToUnsubscribeWithError:task.error];
+                }
             });
         }
         return nil;

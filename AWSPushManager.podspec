@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AWSPushManager'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'AWSPushManager, extracted from AWS sample code to use standalone'
   s.homepage         = 'https://github.com/fetch/AWSPushManager'
   s.license          = 'MIT'

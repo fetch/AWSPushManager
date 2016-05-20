@@ -49,8 +49,6 @@ static NSString* defaultPlatformARN;
         [self setEndpointARN:nil];
         [self setEnabled:NO];
         [self setPlatformARN:nil];
-        
-        [self registerForPushNotifications];
     }
     
     return self;
@@ -146,10 +144,6 @@ static NSString* defaultPlatformARN;
 
 - (void)registerForPushNotifications {
     UIApplication *application = [UIApplication sharedApplication];
-    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types
-                                                                                         categories:nil];
-    [application registerUserNotificationSettings:notificationSettings];
     [application registerForRemoteNotifications];
 }
 

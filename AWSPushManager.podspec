@@ -10,8 +10,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   # s.requires_arc = true
 
-  s.dependency 'AWSCore', '~> 2.3.4'
-  s.dependency 'AWSSNS', '~> 2.3.4'
+  s.dependency 'AWSCore', '~> 2.3'
+  s.dependency 'AWSSNS', '~> 2.3'
 
   s.source_files = 'AWSPushManager/*'
 end

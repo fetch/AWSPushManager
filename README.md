@@ -1,3 +1,5 @@
+⚠️ **Please note:** AWS now officially distributes AWSPushManager as part of their [Mobile Hub helper](https://github.com/aws/aws-mobilehub-helper-ios). Unfortunately this library is [not on CocoaPods](https://github.com/aws/aws-mobilehub-helper-ios/issues/7) yet.
+
 # AWSPushManager
 
 AWS SNS Push registration manager

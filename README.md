@@ -21,7 +21,7 @@ This is the easiest, because it also installs the required dependencies.
 Add `AWSPushManager` to the `Podfile`.
 
 ```
-pod 'AWSPushManager', '~> 0.0.1'
+pod 'AWSPushManager', '~> 1.0.0'
 ```
 
 ### Manual installation

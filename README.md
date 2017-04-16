@@ -47,7 +47,7 @@ And update `AppDelegate.m` to match with the following:
               withOptions:(NSDictionary *)launchOptions {
 
     NSString *platformARN = @"arn:aws:sns:us-east-1:123456789:app/APNS_SANDBOX/SomeAppName";
-    [AWSPushManager defaultPushManager].defaultPlatformARN = platformARN;
+    AWSPushManager.defaultPlatformARN = platformARN;
 
     return [[AWSPushManager defaultPushManager] interceptApplication:application
                                        didFinishLaunchingWithOptions:launchOptions];
